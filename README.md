@@ -34,7 +34,7 @@ generates **watch-party discussion prompts** between episodes.
 | TV client (React Native/Expo) | `client/` | Fire OS APK via `expo run:android` + ADB; Vega build path in `client/README.md` |
 | Remote bridge (Kotlin) | `client/packages/reelmind-remote/` | D-pad/ENTER/BACK key events + voice-intent consumption |
 | Companion agent (Python) | `agent/` | Strands agent, 6 tools, memory, HTTP server |
-| **Open-source kit** | [`tv-agent-quickstart`](https://github.com/<YOUR_GITHUB>/tv-agent-quickstart) (separate repo) | This agent `pip install`s it and runs on it at runtime |
+| **Open-source kit** | [`tv-agent-quickstart`](https://github.com/harshsinghhh120-bot/tv-agent-quickstart) (separate repo) | This agent `pip install`s it and runs on it at runtime |
 
 ### The agent's six tools
 
@@ -163,7 +163,7 @@ Friction encountered while using ADBT/Kiro is recorded in
 
 ## Open Source mini challenge
 
-- **Kit repo:** [`tv-agent-quickstart`](https://github.com/<YOUR_GITHUB>/tv-agent-quickstart) —
+- **Kit repo:** [`tv-agent-quickstart`](https://github.com/harshsinghhh120-bot/tv-agent-quickstart) —
   new Apache-2.0 project created during the hackathon window. This app
   `pip install`s it and runs on it at runtime (agent import chain:
   `reelmind_agent → tv_agent_kit`).
@@ -201,4 +201,4 @@ reelmind/
 ## License
 
 MIT — see [LICENSE](LICENSE). The agent runtime is built on
-[tv-agent-quickstart](https://github.com/<YOUR_GITHUB>/tv-agent-quickstart) (Apache-2.0).
+[tv-agent-quickstart](https://github.com/harshsinghhh120-bot/tv-agent-quickstart) (Apache-2.0).

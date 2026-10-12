@@ -2,10 +2,10 @@
 
 ## Required fields
 
-- **Contribution URL:** <commit/PR URL inside tv-agent-quickstart, e.g. the initial commit or a notable PR>
-- **Project repository URL:** https://github.com/<YOUR_GITHUB>/tv-agent-quickstart
-- **GitHub username:** <your username>
-- **Primary track repo (context):** https://github.com/<YOUR_GITHUB>/reelmind
+- **Contribution URL:** https://github.com/harshsinghhh120-bot/tv-agent-quickstart/commit/7a6f576de0fe9fa1c3211d651dae998ad0745cb8 (initial release of the kit)
+- **Project repository URL:** https://github.com/harshsinghhh120-bot/tv-agent-quickstart
+- **GitHub username:** harshsinghhh120-bot
+- **Primary track repo (context):** https://github.com/harshsinghhh120-bot/reelmind
 
 ## What I did
 

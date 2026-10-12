@@ -1,7 +1,7 @@
 # ReelMind agent
 
 Python companion agent: **Strands Agents SDK** on **Amazon Bedrock**, built on the
-open-source [`tv-agent-quickstart`](https://github.com/<YOUR_GITHUB>/tv-agent-quickstart) kit.
+open-source [`tv-agent-quickstart`](https://github.com/harshsinghhh120-bot/tv-agent-quickstart) kit.
 
 ## Run
 
