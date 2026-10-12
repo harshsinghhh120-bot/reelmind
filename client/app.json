@@ -1,0 +1,23 @@
+{
+  "expo": {
+    "name": "ReelMind",
+    "slug": "reelmind",
+    "version": "0.1.0",
+    "orientation": "landscape",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#0B0E14",
+    "android": {
+      "package": "com.reelmind.app",
+      "intentFilters": [
+        {
+          "action": "com.reelmind.app.ASK",
+          "category": ["DEFAULT"]
+        }
+      ]
+    },
+    "extra": {
+      "agentUrl": "http://192.168.1.10:8000",
+      "viewerId": "couch-1"
+    }
+  }
+}

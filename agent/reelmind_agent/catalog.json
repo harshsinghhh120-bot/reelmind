@@ -1,0 +1,86 @@
+[
+  {
+    "title": "The Bear",
+    "year": 2022,
+    "genres": ["Drama", "Comedy"],
+    "premise": "A fine-dining chef takes over his family's chaotic Chicago sandwich shop after a tragedy.",
+    "known_for": "Kitchen pressure, rapid-fire dialogue, incredible food writing"
+  },
+  {
+    "title": "Severance",
+    "year": 2022,
+    "genres": ["Sci-Fi", "Thriller"],
+    "premise": "Office workers surgically split their memories between work and personal life — until the split starts leaking.",
+    "known_for": "Unnerving corporate aesthetics, one of modern TV's great mysteries"
+  },
+  {
+    "title": "Shogun",
+    "year": 2024,
+    "genres": ["Drama", "Historical"],
+    "premise": "A English shipwrecked sailor becomes a pawn in 1600s Japanese feudal power struggles.",
+    "known_for": "Epic scope, sweeping cast, award-sweeping production"
+  },
+  {
+    "title": "Ted Lasso",
+    "year": 2020,
+    "genres": ["Comedy", "Sports"],
+    "premise": "An American college football coach is hired to manage a British soccer club, with no clue about soccer.",
+    "known_for": "Goodness, heart, and a few famous plot twists"
+  },
+  {
+    "title": "Dark",
+    "year": 2017,
+    "genres": ["Sci-Fi", "Mystery"],
+    "premise": "A missing child pulls a small German town into a four-family time-travel puzzle.",
+    "known_for": "Airtight time-travel plotting — spoiler discipline matters here"
+  },
+  {
+    "title": "The Last of Us",
+    "year": 2023,
+    "genres": ["Drama", "Horror"],
+    "premise": "A smuggler escorts a teenage girl across a post-outbreak America.",
+    "known_for": "Game adaptation done right, emotional acting"
+  },
+  {
+    "title": "Andor",
+    "year": 2022,
+    "genres": ["Sci-Fi", "Spy"],
+    "premise": "A thief is drawn into the rebel war against the Galactic Empire in Star Wars.",
+    "known_for": "Adult, political Star Wars"
+  },
+  {
+    "title": "Fleabag",
+    "year": 2016,
+    "genres": ["Comedy", "Drama"],
+    "premise": "A dry-witted London woman breaks the fourth wall while unraveling from grief.",
+    "known_for": "Fourth-wall comedy, a final scene TV audiences still argue about"
+  },
+  {
+    "title": "Stranger Things",
+    "year": 2016,
+    "genres": ["Sci-Fi", "Horror", "Nostalgia"],
+    "premise": "Kids in 1980s Indiana unravel a government lab's dimensional horror.",
+    "known_for": "80s nostalgia, the Upside Down, massive family-viewing base"
+  },
+  {
+    "title": "Succession",
+    "year": 2018,
+    "genres": ["Drama", "Satire"],
+    "premise": "Heirs circle a media dynasty throne while the father can't decide to let go.",
+    "known_for": "Shakespearean boardroom drama, quotable lines"
+  },
+  {
+    "title": "Avatar: The Last Airbender",
+    "year": 2005,
+    "genres": ["Animation", "Adventure"],
+    "premise": "A boy awakens as the Avatar and must master four elements to end a war.",
+    "known_for": "The gold standard of animated storytelling — huge family co-watch base"
+  },
+  {
+    "title": "Dune: Part Two",
+    "year": 2024,
+    "genres": ["Sci-Fi", "Epic"],
+    "premise": "Paul Atreides joins the Fremen to wage war on the house that destroyed his family.",
+    "known_for": "Scale, sandworms, and Villeneuve's epic framing"
+  }
+]

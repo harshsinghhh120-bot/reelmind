@@ -1,0 +1,14 @@
+# ReelMind companion agent
+#
+# tv-agent-quickstart is the open-source kit this agent runs on.
+#   Option A (hackathon, local checkout):   pip install -e ../../tv-agent-quickstart
+#   Option B (after publishing to GitHub):  replace the next line with:
+#       "git+https://github.com/<YOUR_GITHUB>/tv-agent-quickstart.git"
+-e ../../tv-agent-quickstart
+
+boto3>=1.34
+strands-agents>=0.1
+fastapi>=0.110
+uvicorn>=0.29
+# optional: Amazon Bedrock AgentCore deployment
+# agentcore>=0.1
