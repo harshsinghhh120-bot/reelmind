@@ -16,6 +16,28 @@ focus system in pure TypeScript, remote bridge in Kotlin.
 > The `reelmind-remote` native module requires a dev-client/prebuild build —
 > Expo Go cannot load local native modules.
 
+## Voice intent (Fire OS)
+
+"Alexa, ask ReelMind …" is a **Fire OS custom voice intent** declared in the
+generated `android/` manifest by the config plugin
+[`plugins/withReelMindNative.js`](./plugins/withReelMindNative.js)
+(registered under `plugins` in `app.json`):
+
+- **Exact action:** `com.reelmind.app.ASK` — Fire OS matches actions
+  exactly. Expo's standard `android.intentFilters` config *prefixes* custom
+  actions (`android.intent.action.…`), which silently breaks the exact
+  match — that's why this is a raw-manifest plugin, and why `app.json` must
+  not add an `intentFilters` entry for it (the plugin strips any it finds).
+- The plugin also registers `reelmind-remote` explicitly
+  (`settings.gradle` include + `app` dependency + `MainApplication`
+  package) so the local native module does not depend on autolinking.
+  All four patches are idempotent across prebuilds.
+- In the Fire OS Developer Options console, enter the action **exactly** as
+  `com.reelmind.app.ASK`, launch activity `.MainActivity` with data
+  `reelmind:ask?query={query}` (the Kotlin module also accepts an intent
+  extra named `query`/`value`). See
+  `../docs/day1-device-runbook.md` §4 for the full console checklist.
+
 ## Check before you ship
 
 ```bash

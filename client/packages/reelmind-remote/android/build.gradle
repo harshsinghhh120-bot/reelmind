@@ -1,33 +1,22 @@
-// ReelMind remote bridge — standard React Native local-library build.
-buildscript {
-    ext {
-        minSdkVersion = 24
-        compileSdkVersion = 35
-        targetSdkVersion = 35
-        kotlinVersion = '1.9.25'
-    }
-    repositories {
-        google()
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:8.7.3'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-    }
-}
-
+// ReelMind remote bridge — Android library module.
+//
+// Included into the ReelMind app by plugins/withReelMindNative.js
+// (settings.gradle: include ':reelmind-remote').
+//
+// No buildscript block on purpose: AGP/Kotlin/plugin versions are inherited
+// from the root project (Expo template), which keeps the composite build
+// conflict-free. `react-android` is versionless by design — the
+// react-native gradle plugin aligns it to the react-native version in
+// node_modules.
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
     namespace 'com.reelmind.remote'
-    compileSdkVersion ext.compileSdkVersion
+    compileSdk rootProject.ext.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion ext.minSdkVersion
-        targetSdkVersion ext.targetSdkVersion
-        versionCode 1
-        versionName "0.1.0"
+        minSdkVersion rootProject.ext.minSdkVersion
     }
 
     compileOptions {
@@ -41,6 +30,5 @@ android {
 }
 
 dependencies {
-    // Use the same react-android version as the host app; '+' resolves to it.
-    implementation "com.facebook.react:react-android:+"
+    implementation "com.facebook.react:react-android"
 }

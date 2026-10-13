@@ -22,3 +22,5 @@ hello-state.json
 
 # OS
 .DS_Store
+client/android/
+client/ios/

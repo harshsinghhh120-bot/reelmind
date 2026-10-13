@@ -7,14 +7,11 @@
     "userInterfaceStyle": "dark",
     "backgroundColor": "#0B0E14",
     "android": {
-      "package": "com.reelmind.app",
-      "intentFilters": [
-        {
-          "action": "com.reelmind.app.ASK",
-          "category": ["DEFAULT"]
-        }
-      ]
+      "package": "com.reelmind.app"
     },
+    "plugins": [
+      "./plugins/withReelMindNative.js"
+    ],
     "extra": {
       "agentUrl": "http://192.168.1.10:8000",
       "viewerId": "couch-1"

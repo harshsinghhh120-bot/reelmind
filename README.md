@@ -192,9 +192,17 @@ reelmind/
 │   ├── components/            Focusable, Chip, cards, badges
 │   ├── packages/reelmind-remote/  Kotlin native bridge (keys + voice intent)
 │   └── README.md              device setup, voice console, Vega notes
+├── docs/                      day1-device-runbook.md: clone → APK → voice → test
 └── submission/                description, product feedback, friction log,
                                feature requests, open-source write-up, demo script
+    devpost-form-draft.md      field-by-field Devpost answers (incl. product
+                               feedback + AWS Builder rubric)
 ```
+
+**Docs:** [`docs/day1-device-runbook.md`](docs/day1-device-runbook.md) is the
+single path from clone → APK on a Fire TV → voice intent registered → test
+matrix. [`submission/demo-script.md`](submission/demo-script.md) is the
+<3-min video script + recording checklist.
 
 ## Testing & status
 
@@ -205,8 +213,11 @@ reelmind/
 - ✅ Strands API validated against the installed `strands-agents` release
   (agent construction + `AgentResult` extraction)
 - ✅ Client: `tsc --noEmit` clean; Metro/Hermes bundle builds (Expo SDK 54, RN 0.81)
-- ✅ On-device: demo video shows the app running on a Fire TV (see Devpost submission)
-- Demo video: [link in the Devpost submission]
+- ✅ Prebuild: voice-intent manifest + native-module registration verified and
+  idempotent (config plugin; see client README)
+- ⬜ On-device: first Gradle compile + Fire TV install + voice intent pending —
+  single-evening path in [`docs/day1-device-runbook.md`](docs/day1-device-runbook.md)
+- ⬜ Demo video: < 3 min, record per [`submission/demo-script.md`](submission/demo-script.md)
 
 ## License
 
