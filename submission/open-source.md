@@ -16,7 +16,7 @@ Contents: a one-call Strands-on-Bedrock agent factory, an injectable LLM client
 AgentCore Memory backend behind one interface), a validated `CompanionReply`
 JSON protocol for 10-foot displays, a FastAPI `/chat` server factory, and an
 optional Amazon Bedrock AgentCore deployment wrapper — plus a 10-minute
-hello-world example and 17 offline unit tests.
+hello-world example and 27 offline unit tests.
 
 ## How it works
 

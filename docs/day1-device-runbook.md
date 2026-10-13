@@ -106,7 +106,8 @@ Register the custom voice intent so "Alexa, ask ReelMind …" works:
    narrowest first so Alexa resolves it fast).
 5. Test on the stick: **microphone on remote → "Ask ReelMind, what is a black
    hole?"** → app re-launches on the Ask screen with the question already
-   submitted to the agent. (Near-field. Far-field/VSK is Day 2.)
+   submitted to the agent. (Near-field. Far-field is Day 2 — see
+   `day2-farfield-voice.md`.)
 
 ## 5. On-device test matrix (tick before recording the demo)
 
@@ -136,8 +137,10 @@ Register the custom voice intent so "Alexa, ask ReelMind …" works:
 
 - **Demo video** (the hard deliverable): record the box → TV screen, follow
   `../submission/demo-script.md`.
-- **VSK far-field voice** (hands-free across the room) — Day 2, needs the
-  VSK capability enabled for the app in the console.
+- **Far-field voice** (hands-free across the room, via Fire TV Cube or a
+  paired Echo) — Day 2: the *same* custom intent, no code change, one
+  console toggle. See `day2-farfield-voice.md` (and why we deliberately are
+  **not** doing VSK).
 - **Product feedback section** of the submission (audience, use-cases, what we
   measured) — draft already in `../submission/devpost-form-draft.md`.
 - **AgentCore deployment** (serverless agent, no always-on PC) — Day 2–3.
