@@ -54,9 +54,12 @@ export function AskScreen({
   const send = useCallback(
     async (message: string) => {
       if (busy) return;
+      // Prefix the show context so every turn is self-contained (works in
+      // agent mode, simple mode, and demo mode alike).
+      const finalMessage = displayTitle && displayTitle !== 'General' ? `About ${displayTitle}: ${message}` : message;
       setBusy(true);
       setThread((t) => [...t, { role: 'user', text: message }]);
-      const reply = await chat(message);
+      const reply = await chat(finalMessage);
       setThread((t) => [
         ...t,
         {
@@ -136,7 +139,21 @@ export function AskScreen({
           </Text>
           <ChipRow row={2}>
             {PROGRESS_CHIPS.map((p, i) => (
-              <Chip key={p} id={`prog-${i}`} row={2} col={i} label={p} small onEnter={() => void send(p)} />
+              <Chip
+                key={p}
+                id={`prog-${i}`}
+                row={2}
+                col={i}
+                label={p}
+                small
+                onEnter={() =>
+                  void send(
+                    p === "I'm at the end of the show"
+                      ? `I'm at the end of ${displayTitle}`
+                      : `${p} of ${displayTitle}`,
+                  )
+                }
+              />
             ))}
           </ChipRow>
         </View>

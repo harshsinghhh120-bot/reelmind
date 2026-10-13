@@ -71,10 +71,11 @@ memory (progress per title) that is injected into every turn.
 ```bash
 # from the repo root (kit repo cloned as a sibling)
 cd agent
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt          # includes -e ../../tv-agent-quickstart
-python -m reelmind_agent.main            # http://0.0.0.0:8000  (POST /chat, GET /health)
+./start.sh            # real mode: needs aws configure + Bedrock
+./start.sh demo       # demo mode: offline canned answers — no AWS, no network
 ```
+
+(`start.sh` handles venv + `pip install -r requirements.txt` for you.)
 
 Smoke test:
 
@@ -90,6 +91,10 @@ Offline unit tests (no AWS needed):
 cd agent && python -m unittest tests.test_reelmind -v        # 16 tests
 cd ../tv-agent-quickstart && python -m unittest tests.test_kit -v   # 17 tests
 ```
+
+**Fastest path (zero AWS):** run `./start.sh demo` and point the client at it —
+the whole TV loop works with canned "(demo)" answers. Flip to real mode the
+moment your Bedrock credentials are ready.
 
 ### 2. Run the TV client on your Fire TV stick
 
@@ -193,7 +198,12 @@ reelmind/
 
 ## Testing & status
 
-- ✅ Agent: 33 offline unit tests (kit + ReelMind) passing; wire protocol validated
+- ✅ Agent: 54 offline unit tests (27 kit + 27 ReelMind incl. demo mode) passing
+- ✅ End-to-end HTTP flow verified in demo mode: 13/13 checks (briefing →
+  progress + memory persistence → Q&A → quiz gen/grade → explain levels →
+  discussion)
+- ✅ Strands API validated against the installed `strands-agents` release
+  (agent construction + `AgentResult` extraction)
 - ✅ Client: `tsc --noEmit` clean; Metro/Hermes bundle builds (Expo SDK 54, RN 0.81)
 - ✅ On-device: demo video shows the app running on a Fire TV (see Devpost submission)
 - Demo video: [link in the Devpost submission]

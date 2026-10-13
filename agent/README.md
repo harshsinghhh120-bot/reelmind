@@ -6,15 +6,36 @@ open-source [`tv-agent-quickstart`](https://github.com/harshsinghhh120-bot/tv-ag
 ## Run
 
 ```bash
+./start.sh            # real mode: Amazon Bedrock (needs aws configure)
+./start.sh demo       # demo mode: offline canned answers (no AWS needed)
+```
+
+… or manually:
+
+```bash
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-python -m reelmind_agent.main
+python -m reelmind_agent.main                 # real mode
+DEMO_MODE=1 python -m reelmind_agent.main     # demo mode
 ```
 
 Listens on `0.0.0.0:8000`. Env vars: `REGION`, `MODEL` (default
 `anthropic.claude-sonnet-4-5`), `FAST_MODEL` (default `anthropic.claude-haiku-4-5`),
 `COMPANION_API_KEY`, `STATE_FILE`, `PORT`, `AGENTCORE=1` (deploy to Amazon Bedrock
 AgentCore instead of running FastAPI locally).
+
+### Demo mode (no AWS required)
+
+`DEMO_MODE=1` swaps Bedrock for a **deterministic offline stand-in LLM**
+(`reelmind_agent/demo.py`) and runs the agent in the kit's *simple mode*.
+The full stack — TV client → FastAPI → agent → CompanionReply cards → memory
+persistence — behaves exactly like production (the card protocol is identical),
+but answers are canned and labeled "(demo)". Use it to develop and dry-run the
+TV app before (or without) AWS setup; it is a dev aid, not a feature.
+
+Verified end-to-end in demo mode: briefing, progress set + persistence,
+Q&A, quiz generation + grading (correct & wrong), kid/deep explain,
+discussion prompts — 13/13 HTTP checks passing.
 
 ## API
 
@@ -40,13 +61,14 @@ discussion | progress_update | error` (see `tv_agent_kit/protocol.py`).
 ## Tests (no AWS needed)
 
 ```bash
-python -m unittest tests.test_reelmind -v
+python -m unittest tests.test_reelmind tests.test_demo -v   # 27 tests
 ```
 
 Covers spoiler posture, deterministic quiz grading (incl. letter/number picks),
 LLM adjudication path, explain levels, discussion prompts, memory persistence,
-and offline agent construction. All model calls go through an injectable
-`LLMClient` — tests use `FakeLLMClient`.
+offline agent construction, and the full demo-mode client behavior. All model
+calls go through an injectable `LLMClient` — tests use `FakeLLMClient` /
+`DemoLLMClient`.
 
 ## Deploy to Amazon Bedrock AgentCore
 
