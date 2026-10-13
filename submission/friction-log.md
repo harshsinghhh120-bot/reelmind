@@ -43,4 +43,29 @@
 - **Workaround:** [reelmind-remote + pure-TS focus grid (lib/focus.tsx) — ~200 LOC, zero TV deps]
 - **Suggestion:** [first-party `react-native-tv` key/focus primitives, or an Expo config-plugin for TV key events]
 
-### F5 — [Your real entry…]
+### F5 — [Tool: Expo / React Native] (real, Day 1)
+- **Task:** register the Fire OS custom voice intent (`com.reelmind.app.ASK`) in an Expo RN app
+- **Steps:** added the custom action via Expo's `android.intentFilters` config in `app.json`, ran `expo prebuild`, diffed the generated `AndroidManifest.xml` against the Fire OS console requirements
+- **Expected:** the action string lands in the manifest verbatim — the Fire OS console matches intent actions **exactly**
+- **Actual:** Expo prefixes custom actions → manifest contained `android.intent.action.com.reelmind.app.ASK`. Fire OS exact-match would never fire the app; failure is **silent** (no build error, no runtime log — voice simply never works)
+- **Severity:** High
+- **Workaround:** custom Expo config plugin (`client/plugins/withReelMindNative.js`) that writes the raw manifest intent-filter with the exact action and strips the prefixed duplicate; verified idempotent across re-prebuilds
+- **Suggestion:** pass non-`android.intent.action.*` actions through verbatim (or add a `raw: true` flag) and document exact-match platforms (Fire OS) in the intentFilters docs
+
+### F6 — [Tool: Expo / React Native] (real, Day 1)
+- **Task:** include a **local** RN native package (`reelmind-remote`, `file:./packages/…`) in a prebuild app
+- **Steps:** `expo prebuild`, inspected `android/.autolinked_packages.json` and the generated `MainApplication.kt` for the module
+- **Expected:** local `file:` native dependencies are autolinked like node_modules ones
+- **Actual:** autolink did **not** pick the local module up (autolink file empty for it) — the app runs fine and JS `NativeModules.ReelMindRemote` is simply `null`; with graceful degradation in JS, keys and voice silently do nothing on device
+- **Severity:** High (same silent-failure class as F5)
+- **Workaround:** explicit registration via the same config plugin — `settings.gradle` `include ':reelmind-remote'` + `projectDir`, `implementation project(':reelmind-remote')` in the app, and `add(ReelMindRemotePackage())` in `MainApplication.kt`
+- **Suggestion:** document (or add a prebuild warning for) local native modules that did not autolink; first-party support for explicit local-module registration
+
+### F7 — [Tool: Expo / Android] (real, Day 1)
+- **Task:** make a local Android library module (`:reelmind-remote`) compile against the Expo SDK 54 template
+- **Steps:** wrote the library `build.gradle` the standard way (own `buildscript` with pinned AGP/Kotlin + `react-android` with a version), generated the project
+- **Expected:** library builds with its own declared toolchain versions
+- **Actual:** the SDK 54 template root uses **versionless** `classpath('com.android.tools.build:gradle')` entries (versions resolved at the root), so a library pinning its own AGP/Kotlin risks version-conflict failures and a versioned `com.facebook.react:react-android` risks misalignment with the RN the template actually ships
+- **Severity:** Medium (only bites at first `./gradlew assembleDebug`)
+- **Workaround:** library declares **no** buildscript — inherits root AGP/Kotlin; depends on versionless `com.facebook.react:react-android` (aligned by the RN gradle plugin); `compileSdk`/`minSdk` read from `rootProject.ext.*`
+- **Suggestion:** a documented "add a local native module" recipe in the Expo TV/Android template (include, dependency, registration, version-inheritance rules)
