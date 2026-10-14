@@ -20,6 +20,7 @@ jobs:
           pip install "git+https://github.com/harshsinghhh120-bot/tv-agent-quickstart.git"
           grep -v '^\-e ' requirements.txt > /tmp/reqs.txt
           pip install -r /tmp/reqs.txt
+          pip install pytest
       - name: Unit tests
         working-directory: agent
         run: python3 -m pytest -q
