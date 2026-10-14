@@ -116,5 +116,32 @@ class TestBuildAgentDemo(unittest.TestCase):
             os.unlink(path)
 
 
+class TestSeedDemoState(unittest.TestCase):
+    def test_seed_produces_kit_readable_state(self):
+        import tempfile
+
+        from seed_demo_state import SEED, seed
+
+        path = tempfile.mktemp(suffix=".json")
+        try:
+            seed("couch-1", path)
+            mem = LocalMemoryStore(path)
+            shogun = mem.get_progress("couch-1", "Shogun")
+            self.assertEqual((shogun["season"], shogun["episode"]), (1, 6))
+            self.assertEqual(
+                sorted(mem.get("couch-1").get("progress", {}).keys()),
+                sorted(t.lower() for t, *_ in SEED["progress"]),
+            )
+            self.assertEqual(
+                mem.get("couch-1").get("quizzes"), SEED["quizzes"]
+            )
+            # The progress tool renders exactly this shape.
+            for p in mem.get("couch-1")["progress"].values():
+                f"{p['title']} — S{p['season']}E{p['episode']}"
+        finally:
+            if os.path.exists(path):
+                os.unlink(path)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

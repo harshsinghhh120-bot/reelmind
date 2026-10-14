@@ -209,7 +209,8 @@ matrix. [`submission/demo-script.md`](submission/demo-script.md) is the
 Everything below is green in GitHub Actions CI (`.github/workflows/ci.yml`) and
 locally via `./bootstrap.sh`.
 
-- ✅ Agent: 54 offline unit tests (27 kit + 27 ReelMind incl. demo mode) passing
+- ✅ Agent: 55 offline unit tests (27 kit + 28 ReelMind incl. demo mode +
+  demo-state seeder) passing
 - ✅ End-to-end HTTP flow verified in demo mode: **15/15 checks** (briefing →
   progress + memory persistence → Q&A → quiz gen/grade → explain levels →
   discussion → fallback → wire protocol); runner: `agent/e2e_demo_check.py`

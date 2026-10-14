@@ -34,6 +34,14 @@ Real AI mode (needs AWS credentials in your profile):
 ./start.sh                         # starts with the reelmind profile
 ```
 
+Warm demo state (optional but recommended — makes the spoiler-safe beat real):
+
+```bash
+python3 seed_demo_state.py --file /tmp/reelmind-demo.json --show
+STATE_FILE=/tmp/reelmind-demo.json ./start.sh demo   # Shogun S1E6, Bear S2E8,
+                                                     # Severance S1E9 + quiz history
+```
+
 Keep the agent machine and the Fire TV on **the same Wi-Fi**. Note the agent
 machine's LAN IP (`ipconfig` / `hostname -I`) — the TV app needs it.
 

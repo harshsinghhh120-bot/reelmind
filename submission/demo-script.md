@@ -12,8 +12,10 @@ slideshow, no terminal hero shots (terminal gets one 3-second cut).
 - Agent must be **live** (not demo mode) if you can — the "real Bedrock"
   line then costs you nothing. If AWS isn't ready, demo mode is fine; don't
   claim real AI on camera then.
-- Pre-type the watchlist: 2–3 titles, one with 62% progress (for the
-  spoiler-safe beat).
+- Seed the demo state: `cd agent && python3 seed_demo_state.py --file
+  /tmp/reelmind-demo.json --show` then start the agent with
+  `STATE_FILE=/tmp/reelmind-demo.json ./start.sh` — Shogun S1E6 (the
+  spoiler-safe beat), The Bear S2E8, Severance S1E9, plus quiz history.
 
 ---
 
