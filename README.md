@@ -206,13 +206,18 @@ matrix. [`submission/demo-script.md`](submission/demo-script.md) is the
 
 ## Testing & status
 
+Everything below is green in GitHub Actions CI (`.github/workflows/ci.yml`) and
+locally via `./bootstrap.sh`.
+
 - ✅ Agent: 54 offline unit tests (27 kit + 27 ReelMind incl. demo mode) passing
-- ✅ End-to-end HTTP flow verified in demo mode: 13/13 checks (briefing →
+- ✅ End-to-end HTTP flow verified in demo mode: **15/15 checks** (briefing →
   progress + memory persistence → Q&A → quiz gen/grade → explain levels →
-  discussion)
+  discussion → fallback → wire protocol); runner: `agent/e2e_demo_check.py`
 - ✅ Strands API validated against the installed `strands-agents` release
   (agent construction + `AgentResult` extraction)
-- ✅ Client: `tsc --noEmit` clean; Metro/Hermes bundle builds (Expo SDK 54, RN 0.81)
+- ✅ Client: `tsc --noEmit` clean + **20/20 Jest unit tests** (focus grid,
+  API client contract incl. 20 s timeout, config, state helpers);
+  Metro/Hermes bundle builds (Expo SDK 54, RN 0.81)
 - ✅ Prebuild: voice-intent manifest + native-module registration verified and
   idempotent (config plugin; see client README)
 - ⬜ On-device: first Gradle compile + Fire TV install + voice intent pending —

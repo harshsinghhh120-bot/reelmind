@@ -69,3 +69,11 @@
 - **Severity:** Medium (only bites at first `./gradlew assembleDebug`)
 - **Workaround:** library declares **no** buildscript — inherits root AGP/Kotlin; depends on versionless `com.facebook.react:react-android` (aligned by the RN gradle plugin); `compileSdk`/`minSdk` read from `rootProject.ext.*`
 - **Suggestion:** a documented "add a local native module" recipe in the Expo TV/Android template (include, dependency, registration, version-inheritance rules)
+### F8 — [Tool: Expo / React Native] (real, Day 2)
+- **Task:** add Jest unit tests to the Expo SDK 54 client
+- **Steps:** `npm install -D jest jest-expo` (latest), expecting the standard RN preset flow
+- **Expected:** latest `jest-expo` pairs with the installed Expo SDK
+- **Actual:** npm resolved `jest-expo@57` → ERESOLVE: its `@react-native/jest-preset@0.86` requires `react@^19.2.3` but SDK 54 ships `react@19.1.0` / RN 0.81. `expo-system-ui` installed the same way had the same disease (`^57.x` in an SDK 54 project — it happened to not break prebuild, but was still wrong)
+- **Severity:** Medium (a wrong-but-installing version is worse than an error: it ships a subtly mismatched dependency)
+- **Workaround:** `npx expo install jest jest-expo expo-system-ui` — the Expo-aware installer pins SDK-matched versions (jest-expo ~54, expo-system-ui ~6); jest/@types/jest pinned to 29 to match
+- **Suggestion:** `npm install` peer-checks should flag *Expo SDK* mismatches, not just raw peer ranges — or publish each `expo-*` package with an SDK-coupled `peerDependency` on `expo`

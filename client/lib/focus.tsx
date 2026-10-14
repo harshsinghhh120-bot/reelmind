@@ -118,6 +118,9 @@ class FocusManager {
 
 const manager = new FocusManager();
 
+/** Singleton focus grid — exported for unit tests (and direct use). */
+export { manager as focusManager };
+
 interface FocusContextValue {
   manager: FocusManager;
   focusedId: string | null;

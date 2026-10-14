@@ -51,7 +51,9 @@ zero AWS, which is how we tested end-to-end before a single device build.
 - **Demo mode**: the same endpoints, same schema, canned offline answers.
   15/15 E2E checks pass with zero AWS — this is how the hackathon CI ran the
   whole product loop.
-- 54+ agent tests (16 core + 11 demo + 27 kit-side), all green in CI.
+- **74 offline unit tests + 15-check E2E**, all green in GitHub Actions CI:
+  agent 27 (16 core + 11 demo), kit 27, client 20 (focus grid-walker, API
+  client contract incl. the 20 s abort, config, state helpers).
 
 **Why this architecture:** the JSON contract means the TV app, the demo
 agent, and a future AgentCore-deployed agent are interchangeable — we
@@ -69,7 +71,7 @@ custom voice intents, ADB.
 
 - The entire client focus system + agent contract were scaffolded and
   iterated by an AI coding agent; humans directed, the agent wrote, tested,
-  and self-reviewed (27 kit tests, 15 E2E checks, all green).
+  and self-reviewed (74 unit tests + 15 E2E checks, all green in CI).
 - The Expo config plugin that fixes the voice-intent action prefixing was
   written after the agent diagnosed the generated manifest diff.
 - Development workflow: agent-driven TDD loop (write → test → prebuild-verify
