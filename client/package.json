@@ -8,7 +8,8 @@
     "android": "expo run:android",
     "prebuild": "expo prebuild --platform android",
     "typecheck": "tsc --noEmit",
-    "test": "jest"
+    "test": "jest",
+    "ios": "echo 'ReelMind targets Fire TV (Android) \u2014 no iOS build'"
   },
   "dependencies": {
     "expo": "~54.0.0",
