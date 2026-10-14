@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" font-family="DejaVu Sans, sans-serif">
+  <rect width="1920" height="1080" fill="#0B0E14"/>
+
+  <!-- Title -->
+  <text x="80" y="88" font-size="44" font-weight="bold" fill="#F2F5FA">ReelMind — architecture</text>
+  <text x="80" y="128" font-size="24" fill="#9AA7BD">one JSON contract between a Fire TV app and a Strands + Bedrock agent</text>
+
+  <!-- Left panel: TV app -->
+  <rect x="80" y="170" width="560" height="620" rx="18" fill="#1A2130" stroke="#2A3550" stroke-width="2"/>
+  <rect x="80" y="170" width="560" height="64" rx="18" fill="#141926"/>
+  <text x="360" y="212" font-size="28" font-weight="bold" fill="#FFB13D" text-anchor="middle">Fire TV — ReelMind app</text>
+  <text x="360" y="272" font-size="21" fill="#9AA7BD" text-anchor="middle">React Native · Expo SDK 54 · com.reelmind.app</text>
+  <line x1="120" y1="296" x2="600" y2="296" stroke="#2A3550" stroke-width="2"/>
+  <g font-size="22" fill="#F2F5FA">
+    <circle cx="128" cy="345" r="6" fill="#FFB13D"/>
+    <text x="152" y="353">Virtual focus system</text>
+    <text x="152" y="381" font-size="19" fill="#9AA7BD">pure-TS nearest-node grid walker, zero TV deps</text>
+
+    <circle cx="128" cy="432" r="6" fill="#FFB13D"/>
+    <text x="152" y="440">reelmind-remote (Kotlin)</text>
+    <text x="152" y="468" font-size="19" fill="#9AA7BD">D-pad / ENTER / BACK → JS key events</text>
+
+    <circle cx="128" cy="519" r="6" fill="#FFB13D"/>
+    <text x="152" y="527">Fire OS custom voice intent</text>
+    <text x="152" y="555" font-size="19" fill="#9AA7BD">"Alexa, ask ReelMind …" → app relaunch + query</text>
+
+    <circle cx="128" cy="606" r="6" fill="#FFB13D"/>
+    <text x="152" y="614">Five screens</text>
+    <text x="152" y="642" font-size="19" fill="#9AA7BD">Briefing · Ask · Quiz · Explain · Watch Party</text>
+
+    <circle cx="128" cy="693" r="6" fill="#4CD97B"/>
+    <text x="152" y="701">Touch fallback + graceful degrade</text>
+    <text x="152" y="729" font-size="19" fill="#9AA7BD">works with no native module (web preview, laptop)</text>
+  </g>
+
+  <!-- Arrows -->
+  <g stroke="#FFB13D" stroke-width="4" fill="#FFB13D">
+    <line x1="660" y1="330" x2="790" y2="330"/>
+    <polygon points="790,330 770,320 770,340"/>
+    <line x1="790" y1="640" x2="660" y2="640"/>
+    <polygon points="660,640 680,630 680,650"/>
+  </g>
+  <text x="725" y="308" font-size="20" fill="#FFB13D" text-anchor="middle" font-weight="bold">POST /chat</text>
+  <text x="725" y="362" font-size="17" fill="#9AA7BD" text-anchor="middle">JSON + viewer_id</text>
+  <text x="725" y="618" font-size="20" fill="#4CD97B" text-anchor="middle" font-weight="bold">CompanionReply</text>
+  <text x="725" y="672" font-size="17" fill="#9AA7BD" text-anchor="middle">validated card JSON</text>
+
+  <!-- Center: contract -->
+  <rect x="700" y="400" width="520" height="190" rx="14" fill="#141926" stroke="#FFB13D" stroke-width="2"/>
+  <text x="960" y="438" font-size="24" font-weight="bold" fill="#FFB13D" text-anchor="middle">one schema, eight card kinds</text>
+  <g font-size="19" fill="#F2F5FA" text-anchor="middle">
+    <text x="960" y="478">briefing · answer · quiz · quiz_result</text>
+    <text x="960" y="508">explain · discussion · progress_update · error</text>
+    <text x="960" y="552" font-size="17" fill="#9AA7BD">the client renders cards, never free text —</text>
+    <text x="960" y="576" font-size="17" fill="#9AA7BD">the kit validates the model, downgrades drift</text>
+  </g>
+
+  <!-- Right panel: agent -->
+  <rect x="1280" y="170" width="560" height="620" rx="18" fill="#1A2130" stroke="#2A3550" stroke-width="2"/>
+  <rect x="1280" y="170" width="560" height="64" rx="18" fill="#141926"/>
+  <text x="1560" y="212" font-size="28" font-weight="bold" fill="#FFB13D" text-anchor="middle">Python companion agent</text>
+  <text x="1560" y="272" font-size="21" fill="#9AA7BD" text-anchor="middle">FastAPI · /chat + /health · runs on the kit</text>
+  <line x1="1320" y1="296" x2="1800" y2="296" stroke="#2A3550" stroke-width="2"/>
+  <g font-size="22" fill="#F2F5FA">
+    <circle cx="1328" cy="345" r="6" fill="#FFB13D"/>
+    <text x="1352" y="353">Strands Agents SDK (AWS)</text>
+
+    <circle cx="1328" cy="400" r="6" fill="#FFB13D"/>
+    <text x="1352" y="408">Amazon Bedrock</text>
+    <text x="1352" y="436" font-size="19" fill="#9AA7BD">Sonnet for reasoning · Haiku fast lane</text>
+
+    <circle cx="1328" cy="487" r="6" fill="#FFB13D"/>
+    <text x="1352" y="495">Six tools — spoiler-safe by design</text>
+    <text x="1352" y="523" font-size="19" fill="#9AA7BD">progress · quiz gen + grade · explain · discuss</text>
+
+    <circle cx="1328" cy="574" r="6" fill="#FFB13D"/>
+    <text x="1352" y="582">Per-viewer memory</text>
+    <text x="1352" y="610" font-size="19" fill="#9AA7BD">JSON file ⇄ AgentCore Memory, one interface</text>
+
+    <circle cx="1328" cy="661" r="6" fill="#4CD97B"/>
+    <text x="1352" y="669">Demo mode ⇄ live mode</text>
+    <text x="1352" y="697" font-size="19" fill="#9AA7BD">same endpoints, same schema — one env var</text>
+  </g>
+
+  <!-- Bottom strip -->
+  <rect x="80" y="850" width="1760" height="150" rx="16" fill="#141926" stroke="#2A3550" stroke-width="2"/>
+  <text x="112" y="905" font-size="26" font-weight="bold" fill="#4CD97B">tv-agent-quickstart (Apache-2.0)</text>
+  <text x="112" y="945" font-size="21" fill="#F2F5FA">the open-source kit the agent pip-installs and runs on: agent factory · injectable LLM · memory · CompanionReply protocol · server factory</text>
+  <text x="112" y="978" font-size="21" fill="#9AA7BD">AgentCore Runtime deploy path (day 2) · 27 kit tests · 75 project unit tests + 15-check E2E, green in CI</text>
+</svg>
