@@ -10,10 +10,9 @@
  * Everything degrades gracefully when the native module is absent
  * (e.g. in web previews), so the app still runs with touch input.
  */
-import { NativeEventEmitter, NativeModules, Platform } from 'react-native';
+import { DeviceEventEmitter, NativeModules, Platform } from 'react-native';
 
 const Native = NativeModules.ReelMindRemote || null;
-const Emitter = Native ? new NativeEventEmitter(Native) : null;
 
 export function isNativeAvailable(): boolean {
   return Native != null;
@@ -38,6 +37,10 @@ export function consumeVoiceQuery(): string | null {
 }
 
 export function onKeyEvent(handler: (ev: { key: string }) => void): { remove(): void } {
-  if (!Emitter) return { remove() {} };
-  return Emitter.addListener('reelmind_key_event', handler);
+  // RN 0.81 removed the NativeEventEmitter base class from the Android
+  // bundle, so the native module emits through the core DeviceEventEmitter
+  // directly. The JS singleton is the matching channel (and the listener is
+  // a harmless no-op in web previews, where nothing emits on it).
+  const sub = DeviceEventEmitter.addListener('reelmind_key_event', handler);
+  return { remove: () => sub.remove() };
 }

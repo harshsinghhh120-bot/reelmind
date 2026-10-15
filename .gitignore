@@ -24,3 +24,6 @@ hello-state.json
 .DS_Store
 client/android/
 client/ios/
+
+# android build output of local packages (never commit)
+client/packages/reelmind-remote/android/build/

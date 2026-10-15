@@ -10,6 +10,7 @@ import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
+import com.facebook.react.modules.core.DeviceEventManagerModule
 import com.facebook.react.uimanager.ViewManager
 
 /**
@@ -41,7 +42,7 @@ class ReelMindRemoteModule(reactContext: ReactApplicationContext) :
     @ReactMethod
     fun enableKeyEvents() {
         val activity = reactApplicationContext.currentActivity ?: return
-        val root = (activity as? com.facebook.react.ReactActivity)?.rootView ?: return
+        val root = (activity as? com.facebook.react.ReactActivity)?.reactDelegate?.reactRootView ?: return
         root.isFocusableInTouchMode = true
         root.isFocusable = true
         root.requestFocus()
@@ -62,7 +63,11 @@ class ReelMindRemoteModule(reactContext: ReactApplicationContext) :
                 else -> null
             }
             if (key == null) return@setOnKeyListener false
-            sendEvent(EVENT_KEY, Arguments.createHashMap().apply { putString("key", key) })
+            // RN 0.81: the NativeEventEmitter base class is gone, so emit
+            // directly through the core DeviceEventEmitter JS module.
+            reactApplicationContext
+                .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
+                .emit(EVENT_KEY, Arguments.createMap().apply { putString("key", key) })
             true // consumed: JS decides what back/enter do
         }
     }
@@ -82,7 +87,7 @@ class ReelMindRemoteModule(reactContext: ReactApplicationContext) :
 
         // 2) Data URI: reelmind:ask?query=<spoken text>, or a bare custom-scheme URI.
         intent.data?.let { data ->
-            data.queryParameter("query")?.trim()?.takeIf { it.isNotEmpty() }?.let {
+            data.getQueryParameter("query")?.trim()?.takeIf { it.isNotEmpty() }?.let {
                 clearIntent(activity)
                 return it
             }
