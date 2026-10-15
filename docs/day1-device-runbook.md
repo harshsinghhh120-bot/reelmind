@@ -1,9 +1,15 @@
 # Day 1 — Get ReelMind working on a real Fire TV
 
-> **Status (2026-10-13):** agent side verified 15/15 (E2E + 27 unit tests), client
-> type-checks, prebuild patches verified (voice intent + native module registration,
-> idempotent). **Not yet verified:** the Gradle compile of `:reelmind-remote` and
-> anything on-device. This runbook is the path to close that gap.
+> **Status (2026-10-15):** agent side verified 15/15 (E2E + 27 unit tests), client
+> type-checks (tsc + 20 Jest tests, green in GitHub CI). **Native build VERIFIED:**
+> the first in-sandbox Gradle run produced a full debug APK
+> (`:reelmind-remote:assembleDebug` + `assembleDebug` — BUILD SUCCESSFUL, JDK 17,
+> AGP 8.9.1, arm64-v8a; `ReelMindRemoteModule`/`ReelMindRemotePackage` confirmed
+> present in the DEX). That compile caught and fixed three RN 0.81 API breaks in
+> the native module (commit `a9d50d9` — `rootView`, `NativeEventEmitter`,
+> `Arguments.createHashMap` were all removed/renamed in 0.81). **Still
+> unverified:** only on-device — adb install, the voice-intent console flow, and
+> the demo video.
 
 ## 0. Prerequisites (one-time, on the PC)
 
@@ -64,10 +70,25 @@ cd android && ./gradlew assembleDebug
 
 APK lands at `android/app/build/outputs/apk/debug/app-debug.apk`.
 
-**First-build gotchas** (the sandbox could not run Gradle — expect these):
+**First-build gotchas** (the in-sandbox build hit each of the first three — all
+have known fixes; the RN 0.81 API breaks they exposed are fixed in `a9d50d9`):
 
 - *`SDK location not found`* → create `android/local.properties` with
   `sdk.dir=<your Android SDK path>`.
+- *`./gradlew: Permission denied`* → freshly generated `android/` trees can lose
+  the exec bit: `chmod +x android/gradlew`.
+- *`OutOfMemoryError` / "Gradle build daemon disappeared"* on a ≤4 GB machine →
+  the template default (`-Xmx2048m`) is too big; the flags below built the full
+  APK on a 2 GB / 2-core box in ~3 min (after the first run's dependency
+  downloads):
+  ```bash
+  ./gradlew assembleDebug --no-watch-fs "-PreactNativeArchitectures=arm64-v8a" \
+    "-Dorg.gradle.jvmargs=-Xmx1200m -XX:MaxMetaspaceSize=192m -XX:ReservedCodeCacheSize=128m -XX:+UseSerialGC" \
+    -Dorg.gradle.parallel=false -Dorg.gradle.workers.max=1 \
+    -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
+  ```
+  (arm64-only halves the work — Fire TV sticks are arm64; drop the
+  `reactNativeArchitectures` flag for a release build targeting other ABIs.)
 - *JDK/AGP mismatch errors* → use JDK 17 (the template Gradle wrapper pins
   compatible AGP/Kotlin; the `reelmind-remote` module inherits them).
 - *`reelmind-remote` resolution errors* → confirm
