@@ -100,8 +100,12 @@ kid asks "what's a black hole" mid-scene).
 
 **What we learned (and will change):**
 - *Voice-first beats touch-first on TV.* In every on-LAN demo, remote voice
-  was the input people reached for; tap is the fallback. Day 2 adds VSK
-  far-field ("Alexa…" from across the room) and hands-free follow-up.
+  was the input people reached for; tap is the fallback. Day 2 extends the
+  same custom voice intent to far-field ("Alexa…" from across the room via
+  Fire TV Cube or a paired Echo — one console toggle, zero code). We
+  deliberately skip VSK (Video Skills Kit): it's the content play/search
+  framework — the wrong tool for a companion app (see
+  `docs/day2-farfield-voice.md`).
 - *Structured replies > free text.* One schema for five card types made the
   UX 10x simpler and is the same contract a deployed AgentCore agent will
   serve — the "demo" agent and the "real" agent are a config switch apart.
